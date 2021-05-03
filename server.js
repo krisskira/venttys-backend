@@ -2,7 +2,6 @@ var express = require("express");
 var pm2 = require("pm2");
 
 var app = express();
-app.use(express.json());
 
 // Process handler start
 pm2.connect((error) => {
@@ -43,6 +42,9 @@ app.get("/list", function (req, res) {
 app.get("/stop/:phoneNumber", function (req, res) {
     pm2.stop(req.params.phoneNumber);
 })
+
+app.use(express.json());
+app.use('/qrcode',express.static('./dist/qr_codes'));
 
 app.listen(3000, () => {
   console.log("server is running");
