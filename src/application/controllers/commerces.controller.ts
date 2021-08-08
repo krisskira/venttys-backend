@@ -1,43 +1,43 @@
 import { CommerceRepository } from "../../application/repository/commerce.reposirory";
 import {
-    createCommerceUserCase,
-    deactivateCommerceUserCase,
-    enrollUsersAtCommerceUserCase,
-    getCommerceByPhoneNumberUserCase,
-    getCommercesListUserCase,
-    //   getUsersByCommerceUserCase,
-    removeUserOfCommerceUserCase,
-    updateCommerceUserCase,
+  createCommerceUserCase,
+  deactivateCommerceUserCase,
+  enrollUsersAtCommerceUserCase,
+  getCommerceByPhoneNumberUserCase,
+  getCommercesListUserCase,
+  //   getUsersByCommerceUserCase,
+  removeUserOfCommerceUserCase,
+  updateCommerceUserCase,
 } from "../../application/user-cases/commerce";
-import { Commerce, } from "../../domain/commerce.interface";
 import { Controller, OperationStatus } from "../../domain";
+import { Commerce } from "../../domain/commerce.interface";
 import { CommerceUser } from "../../domain/commerceUser.interface";
 
 export const getCommercesController: Controller<
-    void,
-    Promise<Commerce[]>
+  void,
+  Promise<Commerce[]>
 > = async (): Promise<Commerce[]> => {
-    const repository = new CommerceRepository();
-    return await getCommercesListUserCase(repository);
+  const repository = new CommerceRepository();
+  return await getCommercesListUserCase(repository);
 };
 
 export const getCommerceByPhoneNumberController: Controller<
-    string,
-    Promise<Commerce[]>
+  string,
+  Promise<Commerce[]>
 > = async (commercePhoneNumber): Promise<Commerce[]> => {
-    const repository = new CommerceRepository();
-    return await getCommerceByPhoneNumberUserCase(
-        repository,
-        commercePhoneNumber!
-    );
+  const repository = new CommerceRepository();
+  return await getCommerceByPhoneNumberUserCase(
+    repository,
+    commercePhoneNumber!
+  );
 };
 
 export const createCommerceController: Controller<
-    Commerce,
-    Promise<string>
+  Commerce,
+  Promise<string>
 > = async (commerceInfo): Promise<string> => {
-    const repository = new CommerceRepository();
-    return await createCommerceUserCase(repository, commerceInfo!);
+  const repository = new CommerceRepository();
+  return await createCommerceUserCase(repository, commerceInfo!);
 };
 
 /**
@@ -49,39 +49,39 @@ export const createCommerceController: Controller<
  */
 
 export const updateCommerceController: Controller<
-    Partial<Commerce>,
-    Promise<OperationStatus>
+  Partial<Commerce>,
+  Promise<OperationStatus>
 > = async (commerceInfo): Promise<OperationStatus> => {
-    return await updateCommerceUserCase();
+  return await updateCommerceUserCase();
 };
 
 export const deactivateCommerceController: Controller<
-    string,
-    Promise<OperationStatus>
+  string,
+  Promise<OperationStatus>
 > = async (commercePhoneNumber): Promise<OperationStatus> => {
-    return await deactivateCommerceUserCase();
+  return await deactivateCommerceUserCase();
 };
 
 export const getUsersByCommerceController: Controller<
-    string,
-    Promise<CommerceUser[]>
+  string,
+  Promise<CommerceUser[]>
 > = async (commercePhoneNumber): Promise<CommerceUser[]> => {
-    // const commerceRepository = new CommmerceRepository()
-    // const userRepository = new UserRepository()
-    // return await getUsersByCommerceUserCase(commerceRepository, userRepository, commercePhoneNumber)
-    throw "Not implement yet";
+  // const commerceRepository = new CommmerceRepository()
+  // const userRepository = new UserRepository()
+  // return await getUsersByCommerceUserCase(commerceRepository, userRepository, commercePhoneNumber)
+  throw "Not implement yet";
 };
 
 export const enrollUsersAtCommerceController: Controller<
-    CommerceUser,
-    Promise<string>
+  CommerceUser,
+  Promise<string>
 > = async (userinfo): Promise<string> => {
-    return await enrollUsersAtCommerceUserCase();
+  return await enrollUsersAtCommerceUserCase();
 };
 
 export const removeUserOfCommerceController: Controller<
-    string,
-    Promise<OperationStatus>
+  string,
+  Promise<OperationStatus>
 > = async (userEmail): Promise<OperationStatus> => {
-    return await removeUserOfCommerceUserCase();
+  return await removeUserOfCommerceUserCase();
 };
