@@ -1,0 +1,108 @@
+enum CommerceStatus {
+  Open
+  Close
+}
+
+type CommerceScheduleDate {
+  name: String
+  number_day: Int
+  code: Day
+  close: Time
+  open: Time
+  enable: Boolean
+}
+
+input CommerceScheduleDateInput {
+  name: String!
+  number_day: Int!
+  code: Day!
+  close: TimeInput!
+  open: TimeInput!
+  enable: Boolean!
+}
+
+type CommerceMessageField {
+  enable: Boolean
+  value: String
+}
+
+input CommerceMessageFieldInput {
+  enable: Boolean!
+  value: String!
+}
+
+type CommerceMessage {
+  open: CommerceMessageField
+  await: CommerceMessageField
+  close: CommerceMessageField
+}
+
+input CommerceMessageInput {
+  open: CommerceMessageFieldInput!
+  await: CommerceMessageFieldInput!
+  close: CommerceMessageFieldInput!
+}
+
+type CommerceSchedule {
+  monday: CommerceScheduleDate
+  tuesday: CommerceScheduleDate
+  wednesday: CommerceScheduleDate
+  thursday: CommerceScheduleDate
+  friday: CommerceScheduleDate
+  saturday: CommerceScheduleDate
+  sunday: CommerceScheduleDate
+  holiday: CommerceScheduleDate
+}
+
+input CommerceScheduleInput {
+  monday: CommerceScheduleDateInput!
+  tuesday: CommerceScheduleDateInput!
+  wednesday: CommerceScheduleDateInput!
+  thursday: CommerceScheduleDateInput!
+  friday: CommerceScheduleDateInput!
+  saturday: CommerceScheduleDateInput!
+  sunday: CommerceScheduleDateInput!
+  holiday: CommerceScheduleDateInput!
+}
+
+type Commerce {
+  name: String
+  phone: String
+  address: String
+  state: String
+  enable: Boolean
+  paymentMehods: [String]
+  delivery_price: Int
+  delivery_time: String
+  commerce_status: CommerceStatus
+  messages: CommerceMessage
+  schedules: CommerceSchedule
+}
+
+input CommerceInput {
+  name: String!
+  phone: String!
+  address: String!
+  state: String!
+  enable: Boolean!
+  paymentMehods: [String]!
+  delivery_price: Int!
+  delivery_time: String!
+  commerce_status: CommerceStatus!
+  messages: CommerceMessageInput!
+  schedules: CommerceScheduleInput!
+}
+
+type Query {
+  commerces: [Commerce]
+  commerceBy(phoneNumber: String!): [Commerce]
+  # usersByCommerce(phoneNumber: String): [CommerceUser]
+}
+
+# type Mutation {
+#     commerce(commerceInfo: CommerceInput): String
+#     updateCommerce(commerceInfo: CommercePartialInput): OperationStatus
+#     deactivateCommerce(phoneNumber: String): OperationStatus
+#     enrollUserAtCommerce(userInfo: CommerceUser): String
+#     dropUserOfCommerce(userEmail: String): OperationStatus
+# }

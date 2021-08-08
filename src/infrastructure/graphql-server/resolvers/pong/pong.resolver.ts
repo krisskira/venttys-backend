@@ -1,7 +1,7 @@
 import { pongController } from "../../../../application/controllers";
 import { iResolver } from "../../interfaces";
 
-const pingResolver: iResolver<void> = async (_, args, context, __) => {
+const pingResolver: iResolver<void> = async (...[, args, context]) => {
   return await pongController(args, context);
 };
 

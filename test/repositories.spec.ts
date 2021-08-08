@@ -1,12 +1,15 @@
-import { Day } from "../src/domain/";
-import { Commerce, CommerceScheduleDate } from "../src/domain/commerce.interface";
-import { CommerceRepository } from "../src/application/repository/commerce.reposirory";
+// import { CommerceRepository } from "../src/application/repository/commerce.reposirory";
+// import { Day } from "../src/domain/";
+// import {
+//   Commerce,
+//   CommerceScheduleDate,
+// } from "../src/domain/commerce.interface";
 
 describe("Repositories", () => {
-    test("Pending by implementation", async () => {
-        expect("TODO").toBe("TODO")
-    })
-    /*
+  test("Pending by implementation", async () => {
+    expect("TODO").toBe("TODO");
+  });
+  /*
     const commerceRepo = new CommerceRepository()
     const commercePhoneNumber = "0123456789"
 

@@ -2,9 +2,9 @@ import { GraphQLResolveInfo } from "graphql";
 
 import { iApplicationContext } from "../interfaces/application.interface";
 
-export type iResolver<TArgs> = (
+export type iResolver<TArgsInput> = (
   parent: unknown,
-  args: TArgs,
+  args: TArgsInput,
   context?: iApplicationContext,
   info?: GraphQLResolveInfo
 ) => unknown;

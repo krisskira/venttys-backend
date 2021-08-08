@@ -6,10 +6,7 @@ export const whatsAppReconnectUserCase = async (
   commerceInfo: CommerceBasicInfo
 ): Promise<void> => {
   await processHandler.sendMessage({
-    code: commerceInfo.phoneNumber,
-    data: {
-      commercePhoneNumber: commerceInfo.phoneNumber,
-      commerceName: commerceInfo.name,
-    },
+    code: "RECONNECT",
+    processName: commerceInfo.phoneNumber,
   });
 };
