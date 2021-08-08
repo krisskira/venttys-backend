@@ -1,6 +1,25 @@
-import { Environment, iApplication } from "./infrastructure/interfaces/application.interface";
+import { GraphQLApp } from "./infrastructure/graphql-server";
+import { Environment } from "./infrastructure/interfaces/application.interface";
+import { ConsoleLogger } from "./infrastructure/logger/console.logger";
+import { PM2ProcessHandler } from "./infrastructure/process-handler";
+import { PubSubHandler } from "./infrastructure/pub-sub";
 
-export async function bootstrap(app: iApplication, env: Environment = "production", port: string = "3000") {
-  const _port = parseInt(port, 10);
-  app.start({ port: _port, env });
+export default async function bootstrap(): Promise<void> {
+  const { ENV: _environment = "production", PORT: _port = "3000" } =
+    process.env;
+  const port = parseInt(_port, 10);
+  const environment = <Environment>_environment;
+
+  const logger = new ConsoleLogger(environment);
+  const processHandler = new PM2ProcessHandler(logger);
+  const pubSub = new PubSubHandler();
+
+  const app = new GraphQLApp({
+    environment: environment,
+    logger,
+    pubSub,
+    processHandler,
+  });
+
+  await app.start({ port, env: environment });
 }
