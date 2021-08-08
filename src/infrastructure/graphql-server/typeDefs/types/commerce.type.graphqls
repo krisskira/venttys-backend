@@ -84,25 +84,18 @@ input CommerceInput {
   phone: String!
   address: String!
   state: String!
-  enable: Boolean!
-  paymentMehods: [String]!
-  delivery_price: Int!
-  delivery_time: String!
-  commerce_status: CommerceStatus!
-  messages: CommerceMessageInput!
-  schedules: CommerceScheduleInput!
 }
 
 type Query {
   commerces: [Commerce]
   commerceBy(phoneNumber: String!): [Commerce]
-  # usersByCommerce(phoneNumber: String): [CommerceUser]
+  usersByCommerce(phoneNumber: String!): [CommerceUser]
 }
 
-# type Mutation {
-#     commerce(commerceInfo: CommerceInput): String
-#     updateCommerce(commerceInfo: CommercePartialInput): OperationStatus
-#     deactivateCommerce(phoneNumber: String): OperationStatus
-#     enrollUserAtCommerce(userInfo: CommerceUser): String
-#     dropUserOfCommerce(userEmail: String): OperationStatus
-# }
+type Mutation {
+    commerce(commerceInfo: CommerceInput!): String
+    # updateCommerce(commerceInfo: CommercePartialInput): OperationStatus
+    # deactivateCommerce(phoneNumber: String!): OperationStatus
+    # enrollUserAtCommerce(userInfo: CommerceUser!): String
+    # dropUserOfCommerce(userEmail: String!): OperationStatus
+}

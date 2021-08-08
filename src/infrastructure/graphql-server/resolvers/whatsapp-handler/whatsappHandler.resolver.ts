@@ -5,7 +5,7 @@ import {
   whatsAppHandlerStartSessionController,
   whatsAppHandlerStatusController,
 } from "../../../../application/controllers";
-import { CommerceBasicInfo } from "../../../../domain";
+import { CommerceBasicInfo } from "../../../../domain/commerce.interface";
 import { iResolver } from "../../../../infrastructure/graphql-server/interfaces";
 import { Notification } from "../../../../infrastructure/interfaces";
 

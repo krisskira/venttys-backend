@@ -1,5 +1,5 @@
 import { iRepository } from "../../../application/repository";
-import { Commerce } from "../../../domain";
+import { Commerce } from "../../../domain/commerce.interface";
 import { CommerceUser } from "../../../domain/commerceUser.interface";
 
 export const getUsersByCommerceUserCase = async (

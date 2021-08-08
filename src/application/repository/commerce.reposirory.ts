@@ -1,5 +1,6 @@
+import { Commerce, CommerceSchedule } from "../../domain/commerce.interface";
 import { firebaseDB } from "../../infrastructure/firebase";
-import { Commerce, OperationStatus } from "./../../domain/index";
+import { Day, DayName, DaysCode, OperationStatus } from "./../../domain";
 import { iRepository } from "./repository.interface";
 
 export class CommerceRepository implements iRepository<Commerce> {
@@ -43,10 +44,21 @@ export class CommerceRepository implements iRepository<Commerce> {
 
     async create(commerceInfo: Commerce): Promise<string> {
         return new Promise<string>(async (resolve, reject) => {
+            const commerdceData: Commerce = {
+                ...commerceInfo,
+                enable: true,
+                commerce_status: "Close",
+                delivery_price: 0,
+                delivery_time: "0 min",
+                paymentMehods: [],
+                messages: this.genCommerceMessages(),
+                schedules: this.genWeekDays() as Commerce["schedules"]
+            }
+
             try {
                 const commercesQueryResult = await firebaseDB
                     .collection("commerces")
-                    .add(commerceInfo);
+                    .add(commerdceData);
                 resolve(commercesQueryResult.id);
             } catch (error) {
                 reject(error);
@@ -94,5 +106,44 @@ export class CommerceRepository implements iRepository<Commerce> {
                 reject(error);
             }
         });
+    }
+
+    private genWeekDays(): CommerceSchedule {
+        return DaysCode.reduce<CommerceSchedule>((schedule, d, i) => {
+            return {
+                ...schedule,
+                [d]: {
+                    "number_day": i + 1,
+                    "code": d,
+                    "name": DayName[i],
+                    "enable": false,
+                    "close": {
+                        "hour": 0,
+                        "minute": 0
+                    },
+                    "open": {
+                        "hour": 0,
+                        "minute": 0
+                    }
+                }
+            }
+        }, {})
+    }
+
+    private genCommerceMessages(): Commerce["messages"] {
+        return {
+            "open": {
+                "enable": false,
+                "value": ""
+            },
+            "await": {
+                "enable": false,
+                "value": ""
+            },
+            "close": {
+                "enable": false,
+                "value": ""
+            }
+        }
     }
 }

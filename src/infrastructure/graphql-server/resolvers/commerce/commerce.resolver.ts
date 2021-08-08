@@ -9,7 +9,7 @@ import {
     removeUserOfCommerceController,
     updateCommerceController,
 } from "../../../../application/controllers";
-import { Commerce } from "../../../../domain";
+import { Commerce } from "../../../../domain/commerce.interface";
 import { CommerceUser } from "../../../../domain/commerceUser.interface";
 import { iResolver } from "../../../graphql-server/interfaces";
 // import { Notification } from "../../../interfaces/pubSub.interface";
@@ -137,11 +137,11 @@ module.exports = {
         commerceBy,
         // usersByCommerce,
     },
-    //   Mutation: {
-    //     commerce: createCommerce,
-    //     updateCommerce,
-    //     deactivateCommerce,
-    //     enrollUserAtCommerce,
-    //     dropUserOfCommerce,
-    //   },
+    Mutation: {
+        commerce: createCommerce,
+        //     updateCommerce,
+        //     deactivateCommerce,
+        //     enrollUserAtCommerce,
+        //     dropUserOfCommerce,
+    },
 };

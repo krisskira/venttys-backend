@@ -6,6 +6,9 @@ export interface CommerceBasicInfo {
 }
 
 export type CommerceStatus = "Open" | "Close";
+export type CommerceMessagesType = "open" | "close" | "await";
+export type CommerceSchedule = { [key: Day]: CommerceScheduleDate }
+export type CommerceMessages = { [key: CommerceMessagesType]: CommerceMessage }
 
 export interface CommerceMessage {
   enable: boolean;
