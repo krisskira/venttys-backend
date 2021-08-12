@@ -1,14 +1,15 @@
 import { ErrorCodes, OperationStatus } from "../../../domain";
 import { Commerce } from "../../../domain/commerce.interface";
-import { CommerceRepository } from "../../repository";
+import { CommerceRepository, iRepository } from "../../repository";
 
 export const updateCommerceUserCase = async (
-  data: Partial<Commerce>,
-  commerceRepository: CommerceRepository
+    data: Partial<Commerce>,
+    commerceRepository: iRepository<Commerce>
 ): Promise<OperationStatus> => {
-  data;
-  commerceRepository;
-  return new Promise<OperationStatus>(() => {
-    throw ErrorCodes.noImplementYet;
-  });
+    data;
+    commerceRepository;
+    if (!data.commerceId) {
+        throw ErrorCodes.requiredFieldsAreMissing
+    }
+    return commerceRepository.update(data)
 };

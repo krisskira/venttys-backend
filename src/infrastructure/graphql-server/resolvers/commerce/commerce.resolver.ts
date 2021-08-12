@@ -88,11 +88,11 @@ const deactivateCommerce: iResolver<{ commerceId: string }> = async (
   }
 };
 
-const usersByCommerce: iResolver<{ phoneNumber: string }> = async (
-  ...[, { phoneNumber }, context]
+const usersByCommerce: iResolver<{ commerceId: string }> = async (
+  ...[, { commerceId }, context]
 ) => {
   try {
-    return await getUsersByCommerceController(phoneNumber);
+    return await getUsersByCommerceController(commerceId);
   } catch (error) {
     context?.logger?.log({
       tag: "***-> Resolver: usersByCommerce",

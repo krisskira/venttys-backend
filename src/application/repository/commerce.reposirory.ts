@@ -72,13 +72,16 @@ export class CommerceRepository implements iRepository<Commerce> {
         delivery_time: "0 min",
         paymentMehods: [],
         messages: this.genCommerceMessages(),
-        schedules: this.genWeekDays() as Commerce["schedules"],
+        schedules: this.genWeekDays() as Commerce["schedules"]
       };
 
       try {
         const commercesQueryResult = await firebaseDB
           .collection("commerces")
           .add(commerdceData);
+          await commercesQueryResult.update({
+              commerceId: commercesQueryResult.id
+          })
         resolve(commercesQueryResult.id);
       } catch (error) {
         reject(error);
@@ -88,21 +91,11 @@ export class CommerceRepository implements iRepository<Commerce> {
 
   async update(data: Partial<Commerce>): Promise<OperationStatus> {
     return new Promise<OperationStatus>(async (resolve, reject) => {
-      try {
-        const commercesQueryResult = await firebaseDB
+        await firebaseDB
           .collection("commerces")
-          .where("phone", "==", data.phone)
-          .get();
-        if (!!commercesQueryResult.docs.length) {
-          await commercesQueryResult.docs[
-            commercesQueryResult.docs.length
-          ].ref.set(data);
+          .doc(data.commerceId!)
+          .update({...data});
           resolve("Completed");
-        }
-        resolve("NoCompleted");
-      } catch (error) {
-        reject(error);
-      }
     });
   }
 

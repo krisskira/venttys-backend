@@ -51,7 +51,7 @@ type Commerce {
 type Query {
   commerces: [Commerce]
   commerceBy(phoneNumber: String!): [Commerce]
-  usersByCommerce(phoneNumber: String!): [CommerceUser]
+  usersByCommerce(commerceId: String!): [CommerceUser]
 }
 
 type Mutation {

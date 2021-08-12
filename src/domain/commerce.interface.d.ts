@@ -25,6 +25,7 @@ export interface CommerceScheduleDate {
 }
 
 export interface Commerce {
+  commerceId: string;
   name: string;
   phone: string;
   address: string;

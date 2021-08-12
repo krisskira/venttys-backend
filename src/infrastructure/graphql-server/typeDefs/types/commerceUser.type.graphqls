@@ -7,3 +7,7 @@ type CommerceUser {
     phone: String
     rol: ROL
 }
+
+type Mutation {
+    updateUser(userInfo: CommerceUserPartialInput!): String
+}
