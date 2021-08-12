@@ -1,4 +1,5 @@
 import {
+  auth,
   credential,
   firestore,
   initializeApp,
@@ -12,3 +13,5 @@ const app = initializeApp({
 });
 
 export const firebaseDB = firestore(app);
+export const firebaseAuth: auth.Auth = auth(app);
+export type UserRecord = auth.UpdateRequest;

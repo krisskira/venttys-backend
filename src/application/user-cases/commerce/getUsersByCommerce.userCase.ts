@@ -1,11 +1,15 @@
-import { iRepository } from "../../../application/repository";
-import { Commerce } from "../../../domain/commerce.interface";
+import { iUserRepository } from "../../../application/repository";
 import { CommerceUser } from "../../../domain/commerceUser.interface";
 
+/**
+ * Get list of `Users` by database Id the commerce.
+ * @param commerceRepository
+ * @param userRepository
+ * @param commerceId Database Id the commerce.
+ */
 export const getUsersByCommerceUserCase = async (
-  commerceRepository: iRepository<Commerce>,
-  userRepository: iRepository<CommerceUser>,
-  commercePhoneNumber: string
+  userRepository: iUserRepository,
+  commerceId: string
 ): Promise<CommerceUser[]> => {
-  throw "Not implement yet";
+  return await userRepository.getUsersByDBCommerceID(commerceId);
 };

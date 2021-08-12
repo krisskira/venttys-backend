@@ -1,6 +1,6 @@
 import { Commerce, CommerceSchedule } from "../../domain/commerce.interface";
 import { firebaseDB } from "../../infrastructure/firebase";
-import { Day, DayName, DaysCode, OperationStatus } from "./../../domain";
+import { DayName, DaysCode, ErrorCodes, OperationStatus } from "./../../domain";
 import { iRepository } from "./repository.interface";
 
 export class CommerceRepository implements iRepository<Commerce> {
@@ -20,7 +20,27 @@ export class CommerceRepository implements iRepository<Commerce> {
     });
   }
 
-  async getById(commercePhoneNumber: string | number): Promise<Commerce[]> {
+  async getById(id: string): Promise<Commerce> {
+    return new Promise<Commerce>(async (resolve, reject) => {
+      try {
+        const commercesDoc = await firebaseDB
+          .collection("commerces")
+          .doc(id)
+          .get();
+        if (!commercesDoc.exists) {
+          reject(ErrorCodes.commerceNotFound);
+          return;
+        }
+        resolve(<Commerce>commercesDoc.data());
+      } catch (error) {
+        reject(error);
+      }
+    });
+  }
+
+  async getByComercePhone(
+    commercePhoneNumber: string | number
+  ): Promise<Commerce[]> {
     return new Promise<Commerce[]>(async (resolve, reject) => {
       try {
         const commercesQueryResult = await firebaseDB.collection("commerces");
@@ -28,7 +48,7 @@ export class CommerceRepository implements iRepository<Commerce> {
           .where("phone", "==", commercePhoneNumber)
           .get();
         if (!commerces.size) {
-          reject("commerce_not_found");
+          reject(ErrorCodes.commerceNotFound);
           return;
         }
         const commercesData = commerces.docs.map<Commerce>(

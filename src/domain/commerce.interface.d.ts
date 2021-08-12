@@ -20,6 +20,7 @@ export interface CommerceScheduleDate {
   number_day: number;
   code: Day;
   close: Time;
+  open: Time;
   enable: boolean;
 }
 

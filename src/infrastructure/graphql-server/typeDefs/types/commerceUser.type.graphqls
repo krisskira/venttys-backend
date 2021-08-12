@@ -7,13 +7,3 @@ type CommerceUser {
     phone: String
     rol: ROL
 }
-
-input CommerceUserInput {
-    auth_id: String!
-    address: String!
-    comerce: String!
-    email: String!
-    name: String!
-    phone: String!
-    rol: ROL!
-}

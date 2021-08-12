@@ -52,3 +52,11 @@ export type Time = {
   minute: number;
   second?: number;
 };
+
+export const ErrorCodes = {
+  requiredFieldsAreMissing: "required_field_are_missing",
+  commerceNotFound: "commerce_not_found",
+  userNotFound: "user_not_found",
+  noImplementYet: "not_implement_yet",
+  badImplementation: "bad_implementation",
+};

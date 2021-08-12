@@ -8,4 +8,5 @@ export interface CommerceUser {
   name: string;
   phone: string;
   rol: ROL;
+  password?: string;
 }

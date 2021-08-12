@@ -4,5 +4,5 @@ import { Commerce } from "../../../domain/commerce.interface";
 export const getCommercesListUserCase = async (
   commerceRepository: iRepository<Commerce>
 ): Promise<Commerce[]> => {
-  return commerceRepository.get();
+  return await commerceRepository.get();
 };

@@ -1,0 +1,45 @@
+
+input CommerceScheduleDatePartialInput {
+  name: String
+  number_day: Int
+  code: Day
+  close: TimeInput
+  open: TimeInput
+  enable: Boolean
+}
+
+input CommerceMessageFieldPartialInput {
+  enable: Boolean
+  value: String
+}
+
+input CommerceMessagePartialInput {
+  open: CommerceMessageFieldPartialInput
+  await: CommerceMessageFieldPartialInput
+  close: CommerceMessageFieldPartialInput
+}
+
+input CommerceSchedulePartialInput {
+  monday: CommerceScheduleDatePartialInput
+  tuesday: CommerceScheduleDatePartialInput
+  wednesday: CommerceScheduleDatePartialInput
+  thursday: CommerceScheduleDatePartialInput
+  friday: CommerceScheduleDatePartialInput
+  saturday: CommerceScheduleDatePartialInput
+  sunday: CommerceScheduleDatePartialInput
+  holiday: CommerceScheduleDatePartialInput
+}
+
+input CommercePartialInput {
+  name: String
+  phone: String
+  address: String
+  state: String
+  enable: Boolean
+  paymentMehods: [String]
+  delivery_price: Int
+  delivery_time: String
+  commerce_status: CommerceStatus
+  messages: CommerceMessagePartialInput
+  schedules: CommerceSchedulePartialInput
+}

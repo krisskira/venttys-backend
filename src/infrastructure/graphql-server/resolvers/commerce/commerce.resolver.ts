@@ -1,4 +1,4 @@
-import { ApolloError, toApolloError } from "apollo-server-express";
+import { ApolloError } from "apollo-server-express";
 
 import {
   createCommerceController,
@@ -24,7 +24,7 @@ const commerces: iResolver<void> = async (...[, , context]) => {
       type: "ERROR",
       msg: error.message,
     });
-    throw toApolloError(error, "INTERNAL_SERVER_ERROR");
+    throw new ApolloError(error.toString(), "INTERNAL_SERVER_ERROR");
   }
 };
 
@@ -54,7 +54,7 @@ const createCommerce: iResolver<{ commerceInfo: Commerce }> = async (
       type: "ERROR",
       msg: error.message,
     });
-    throw toApolloError(error, "INTERNAL_SERVER_ERROR");
+    throw new ApolloError(error.toString(), "INTERNAL_SERVER_ERROR");
   }
 };
 
@@ -69,22 +69,22 @@ const updateCommerce: iResolver<{ commerceInfo: Partial<Commerce> }> = async (
       type: "ERROR",
       msg: error.message,
     });
-    throw toApolloError(error, "INTERNAL_SERVER_ERROR");
+    throw new ApolloError(error.toString(), "INTERNAL_SERVER_ERROR");
   }
 };
 
-const deactivateCommerce: iResolver<{ phoneNumber: string }> = async (
-  ...[, { phoneNumber }, context]
+const deactivateCommerce: iResolver<{ commerceId: string }> = async (
+  ...[, { commerceId }, context]
 ) => {
   try {
-    return await deactivateCommerceController(phoneNumber);
+    return await deactivateCommerceController(commerceId);
   } catch (error) {
     context?.logger?.log({
       tag: "***-> Resolver: deactivateCommerce",
       type: "ERROR",
       msg: error.message,
     });
-    throw toApolloError(error, "INTERNAL_SERVER_ERROR");
+    throw new ApolloError(error.toString(), "INTERNAL_SERVER_ERROR");
   }
 };
 
@@ -99,7 +99,7 @@ const usersByCommerce: iResolver<{ phoneNumber: string }> = async (
       type: "ERROR",
       msg: error.message,
     });
-    throw toApolloError(error, "INTERNAL_SERVER_ERROR");
+    throw new ApolloError(error.toString(), "INTERNAL_SERVER_ERROR");
   }
 };
 
@@ -114,35 +114,35 @@ const enrollUserAtCommerce: iResolver<{ userInfo: CommerceUser }> = async (
       type: "ERROR",
       msg: error.message,
     });
-    throw toApolloError(error, "INTERNAL_SERVER_ERROR");
+    throw new ApolloError(error.toString(), "INTERNAL_SERVER_ERROR");
   }
 };
 
-const dropUserOfCommerce: iResolver<{ userEmail: string }> = async (
-  ...[, { userEmail }, context]
+const dropUserOfCommerce: iResolver<{ userId: string }> = async (
+  ...[, { userId }, context]
 ) => {
   try {
-    return await removeUserOfCommerceController(userEmail);
+    return await removeUserOfCommerceController(userId);
   } catch (error) {
     context?.logger?.log({
       tag: "***-> Resolver: dropUserOfCommerce",
       type: "ERROR",
       msg: error.message,
     });
-    throw toApolloError(error, "INTERNAL_SERVER_ERROR");
+    throw new ApolloError(error.toString(), "INTERNAL_SERVER_ERROR");
   }
 };
 module.exports = {
   Query: {
     commerces,
     commerceBy,
-    // usersByCommerce,
+    usersByCommerce,
   },
   Mutation: {
     commerce: createCommerce,
-    //     updateCommerce,
-    //     deactivateCommerce,
-    //     enrollUserAtCommerce,
-    //     dropUserOfCommerce,
+    updateCommerce,
+    deactivateCommerce,
+    enrollUserAtCommerce,
+    dropUserOfCommerce,
   },
 };

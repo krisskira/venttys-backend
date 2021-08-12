@@ -12,35 +12,15 @@ type CommerceScheduleDate {
   enable: Boolean
 }
 
-input CommerceScheduleDateInput {
-  name: String!
-  number_day: Int!
-  code: Day!
-  close: TimeInput!
-  open: TimeInput!
-  enable: Boolean!
-}
-
 type CommerceMessageField {
   enable: Boolean
   value: String
-}
-
-input CommerceMessageFieldInput {
-  enable: Boolean!
-  value: String!
 }
 
 type CommerceMessage {
   open: CommerceMessageField
   await: CommerceMessageField
   close: CommerceMessageField
-}
-
-input CommerceMessageInput {
-  open: CommerceMessageFieldInput!
-  await: CommerceMessageFieldInput!
-  close: CommerceMessageFieldInput!
 }
 
 type CommerceSchedule {
@@ -52,17 +32,6 @@ type CommerceSchedule {
   saturday: CommerceScheduleDate
   sunday: CommerceScheduleDate
   holiday: CommerceScheduleDate
-}
-
-input CommerceScheduleInput {
-  monday: CommerceScheduleDateInput!
-  tuesday: CommerceScheduleDateInput!
-  wednesday: CommerceScheduleDateInput!
-  thursday: CommerceScheduleDateInput!
-  friday: CommerceScheduleDateInput!
-  saturday: CommerceScheduleDateInput!
-  sunday: CommerceScheduleDateInput!
-  holiday: CommerceScheduleDateInput!
 }
 
 type Commerce {
@@ -79,13 +48,6 @@ type Commerce {
   schedules: CommerceSchedule
 }
 
-input CommerceInput {
-  name: String!
-  phone: String!
-  address: String!
-  state: String!
-}
-
 type Query {
   commerces: [Commerce]
   commerceBy(phoneNumber: String!): [Commerce]
@@ -94,8 +56,8 @@ type Query {
 
 type Mutation {
     commerce(commerceInfo: CommerceInput!): String
-    # updateCommerce(commerceInfo: CommercePartialInput): OperationStatus
-    # deactivateCommerce(phoneNumber: String!): OperationStatus
-    # enrollUserAtCommerce(userInfo: CommerceUser!): String
-    # dropUserOfCommerce(userEmail: String!): OperationStatus
+    updateCommerce(commerceInfo: CommercePartialInput): OperationStatus
+    deactivateCommerce(commerceId: String!): OperationStatus
+    enrollUserAtCommerce(userInfo: CommerceUserInput!): String
+    dropUserOfCommerce(userId: String!): OperationStatus
 }
