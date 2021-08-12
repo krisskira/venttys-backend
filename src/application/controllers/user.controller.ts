@@ -7,9 +7,9 @@ export const updateUserController: Controller<
   Partial<CommerceUser>,
   Promise<OperationStatus>
 > = async (userInfo): Promise<OperationStatus> => {
-    if(!userInfo?.auth_id){
-        throw ErrorCodes.requiredFieldsAreMissing
-    }
+  if (!userInfo?.auth_id) {
+    throw ErrorCodes.requiredFieldsAreMissing;
+  }
   const userRepository = new UserRepository();
   return await updateUserUserCase(userInfo, userRepository);
 };
