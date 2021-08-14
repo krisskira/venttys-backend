@@ -4,5 +4,5 @@ export const whatsAppCloseSessionUserCase = async (
   processHandler: iProcessHandler,
   commercePhoneNumber: string
 ): Promise<void> => {
-  await processHandler?.stop(commercePhoneNumber);
+  await processHandler.stop(commercePhoneNumber);
 };

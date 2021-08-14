@@ -18,5 +18,5 @@ export const whatsAppStartSessionUseCase = async (
       commerceNumber: processName,
     },
   };
-  processHandler?.run(args);
+  await processHandler.run(args);
 };

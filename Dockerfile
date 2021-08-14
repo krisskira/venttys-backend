@@ -36,6 +36,6 @@ EXPOSE 80
 
 COPY --from=App /home/app /home/app
 WORKDIR /home/app
-VOLUME [ "/home/app/public/qr" ]
+VOLUME [ "/home/app/public/qr", "/home/app/logs" ]
 
 CMD ["npm", "start"]

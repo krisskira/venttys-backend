@@ -32,11 +32,11 @@ interface iProcess {
 
 export interface iProcessHandler {
   init: () => Promise<void>;
-  run: (process: iProcessArgs) => void;
+  run: (process: iProcessArgs) => Promise<void>;
   stop: (process: string) => Promise<void>;
   restart: (process: string) => Promise<void>;
   list: () => Promise<iProcess[]>;
   getProcess: (processName: string | number) => Promise<iProcess[]>;
   sendMessage: (args: iProcessMessageArgs) => Promise<void>;
-  onDestroyClass: () => void;
+  onDestroyClass: () => Promise<void>;
 }

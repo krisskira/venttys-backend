@@ -51,6 +51,7 @@
     "graphql-upload": "^12.0.0",
     "pm2": "^5.1.0",
     "subscriptions-transport-ws": "^0.9.19",
-    "venom-bot": "^3.0.21"
+    "venom-bot": "^3.0.21",
+    "winston": "^3.3.3"
   }
 }

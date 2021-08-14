@@ -29,7 +29,7 @@ export class PM2ProcessHandler implements iProcessHandler {
     });
   }
 
-  onDestroyClass(): void {
+  async onDestroyClass(): Promise<void> {
     this._logger?.log({
       type: "WARNING",
       tag: this._TAG,

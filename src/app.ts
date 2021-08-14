@@ -1,7 +1,9 @@
 import { GraphQLApp } from "./infrastructure/graphql-server";
 import { Environment } from "./infrastructure/interfaces/application.interface";
-import { ConsoleLogger } from "./infrastructure/logger/console.logger";
-import { PM2ProcessHandler } from "./infrastructure/process-handler";
+// import { ConsoleLogger } from "./infrastructure/logger/console.logger";
+// import { PM2ProcessHandler } from "./infrastructure/process-handler";
+import { WistonLogger } from "./infrastructure/logger/wiston.logger";
+import { ShellProcessHandler } from "./infrastructure/process-handler";
 import { PubSubHandler } from "./infrastructure/pub-sub";
 
 export default async function bootstrap(): Promise<void> {
@@ -10,8 +12,11 @@ export default async function bootstrap(): Promise<void> {
   const port = parseInt(_port, 10);
   const environment = <Environment>_environment;
 
-  const logger = new ConsoleLogger(environment);
-  const processHandler = new PM2ProcessHandler(logger);
+  //   const logger = new ConsoleLogger(environment);
+  const logger = new WistonLogger(environment);
+  //   const processHandler = new PM2ProcessHandler(logger);
+  const processHandler = new ShellProcessHandler(logger);
+
   const pubSub = new PubSubHandler();
 
   const app = new GraphQLApp({
