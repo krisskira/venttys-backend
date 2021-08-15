@@ -56,7 +56,7 @@ export class PubSubHandler implements iPubSub {
     this._kafkaConsumer = KafkaConsumer.createReadStream(
       {
         "group.id": "kafka",
-        "client.id": this._MAIN_TOPIC,
+        "client.id": `${this._MAIN_TOPIC}:${genRandomString(5)}`,
         "metadata.broker.list": args.host,
       },
       {},
