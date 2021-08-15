@@ -7,8 +7,12 @@ import { ShellProcessHandler } from "./infrastructure/process-handler";
 import { PubSubHandler } from "./infrastructure/pub-sub";
 
 export default async function bootstrap(): Promise<void> {
-  const { ENV: _environment = "production", PORT: _port = "3000" } =
-    process.env;
+  const {
+    ENV: _environment = "production",
+    PORT: _port = "3000",
+    EXTERNAL_PUBSUB_SERVER = "",
+  } = process.env;
+
   const port = parseInt(_port, 10);
   const environment = <Environment>_environment;
 
@@ -17,7 +21,13 @@ export default async function bootstrap(): Promise<void> {
   //   const processHandler = new PM2ProcessHandler(logger);
   const processHandler = new ShellProcessHandler(logger);
 
-  const pubSub = new PubSubHandler();
+  const pubSub = new PubSubHandler(
+    {
+      host: EXTERNAL_PUBSUB_SERVER,
+      topics: [],
+    },
+    logger
+  );
 
   const app = new GraphQLApp({
     environment: environment,

@@ -11,17 +11,27 @@ export class WistonLogger implements iLogger {
     this.env = env;
     const transporOptionBuilder = (level: string) => {
       return {
-        zippedArchive: true,
         dirname: join(__dirname, "../../../logs"),
         filename: level + ".log",
         level: level,
         maxsize: 5 * 1024 * 1024,
         maxFiles: 5,
+        format: format.combine(
+          format.json(),
+          format.timestamp(),
+          format.colorize(),
+          format.simple()
+        ),
       };
     };
     this._logger = createLogger({
       level: "debug",
-      format: format.combine(format.json(), format.timestamp()),
+      format: format.combine(
+        format.json(),
+        format.timestamp(),
+        format.colorize(),
+        format.simple()
+      ),
       defaultMeta: { service: "venttys-graphql-api" },
       transports: [
         new transports.File(transporOptionBuilder("info")),
@@ -45,29 +55,25 @@ export class WistonLogger implements iLogger {
       case "DEBUG":
         this._logger.log({
           level: "debug",
-          message: args.msg,
-          additional: args.tag,
+          message: args.tag + args.msg,
         });
         break;
       case "INFO":
         this._logger.log({
           level: "info",
-          message: args.msg,
-          additional: args.tag,
+          message: args.tag + args.msg,
         });
         break;
       case "WARNING":
         this._logger.log({
           level: "warn",
-          message: args.msg,
-          additional: args.tag,
+          message: args.tag + args.msg,
         });
         break;
       case "ERROR":
         this._logger.log({
           level: "error",
-          message: args.msg,
-          additional: args.tag,
+          message: args.tag + args.msg,
         });
         break;
     }

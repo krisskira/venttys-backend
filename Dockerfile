@@ -28,10 +28,10 @@ ENV NODE_PATH $NODE_HOME/lib/node_modules
 ENV PATH $NODE_HOME/bin:$PATH
 
 RUN curl https://nodejs.org/dist/v$NODE_VERSION/$NODE_PACKAGE.tar.gz | tar -xzC /opt/
-RUN npm install -g forever
 
-ENV PORT=80
+ENV EXTERNAL_PUBSUB_SERVER='kafka:9092'
 ENV ENV=production
+ENV PORT=80
 EXPOSE 80
 
 COPY --from=App /home/app /home/app

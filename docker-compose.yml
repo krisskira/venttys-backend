@@ -6,11 +6,15 @@ services:
     environment: 
       - PORT=80
       - ENV=development
+      - EXTERNAL_PUBSUB_SERVER='kafka:9092'
     volumes: 
       - ./public:/home/app/public
       - /var/run/docker.sock:/var/run/docker.sock
     ports: 
       - 80:80
+    networks: 
+      - venttys-net
+
 networks: 
   venttys-net:
-    name: venttys
+    name: venttys-net

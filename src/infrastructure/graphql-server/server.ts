@@ -72,13 +72,14 @@ export class GraphQLApp implements iApplication {
 
       httpServer.listen(args.port, () => {
         this._logger?.log({
-          type: "INFO",
-          tag: `***-> Server settings (${args.env}):`,
-          msg: `
-                        🚀 Server ready at http://localhost:${args.port}${apolloServer.graphqlPath}
-                        🚀 Server ready at ws://localhost:${args.port}${apolloServer.graphqlPath}
-                        🚀 Public dir at http://localhost:${args.port}/public
-                    `,
+          type: "DEBUG",
+          tag: `***-> Server settings (${args.env}):\n`,
+          msg:
+            `🚀 Server ready at http://localhost:${args.port}${apolloServer.graphqlPath}` +
+            "\n" +
+            `🚀 Server ready at ws://localhost:${args.port}${apolloServer.graphqlPath}` +
+            "\n" +
+            `🚀 Public dir at http://localhost:${args.port}/public`,
         });
       });
     } catch (error) {
