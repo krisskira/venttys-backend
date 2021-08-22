@@ -10,6 +10,7 @@
     "dev": "ts-node-dev ./src/index.ts",
     "build": "tsc",
     "postbuild": "copyfiles **/*.graphqls dist",
+    "create:topic": "node ./demo-scripts/kafka/admin.js",
     "lint": "eslint --ignore-path .gitignore . --ext .ts",
     "lint:fix": "npm run lint -- --fix",
     "test": "jest --verbose"
