@@ -1,0 +1,2 @@
+** LIST KAFKA TOPICS:
+docker run -it --rm --network venttys-net -e KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181 bitnami/kafka:latest kafka-topics.sh --list  --zookeeper zookeeper:2181
