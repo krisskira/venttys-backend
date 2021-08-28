@@ -1,7 +1,7 @@
 input CommerceUserInput {
     auth_id: String
     address: String!
-    comerce: String!
+    commerce: String!
     email: String!
     name: String!
     phone: String!

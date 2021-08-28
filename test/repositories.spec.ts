@@ -73,7 +73,7 @@ describe("Repositories", () => {
 
   // test("Get Commerce by Id", async () => {
   //     const commerceRepo = new CommerceRepository()
-  //     return commerceRepo.getByComercePhone(commercePhoneNumber).then( commerce => {
+  //     return commerceRepo.getByCommercePhone(commercePhoneNumber).then( commerce => {
   //         expect(commerce.length).toEqual(1)
   //     })
   // });

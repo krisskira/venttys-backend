@@ -5,5 +5,5 @@ export const getCommerceByPhoneNumberUserCase = async (
   reposirory: iRepository<Commerce>,
   commercePhoneNumber: string
 ): Promise<Commerce[]> => {
-  return await reposirory.getByComercePhone(commercePhoneNumber);
+  return await reposirory.getByCommercePhone(commercePhoneNumber);
 };

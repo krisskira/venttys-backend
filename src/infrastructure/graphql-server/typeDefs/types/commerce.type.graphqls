@@ -3,13 +3,19 @@ enum CommerceStatus {
   Close
 }
 
+type PaymentMethod {
+  name: String
+  id: String
+  description: String
+}
+
 type CommerceScheduleDate {
   name: String
   number_day: Int
   code: Day
   close: Time
   open: Time
-  enable: Boolean
+  is_enable: Boolean
 }
 
 type CommerceMessageField {
@@ -23,29 +29,18 @@ type CommerceMessage {
   close: CommerceMessageField
 }
 
-type CommerceSchedule {
-  monday: CommerceScheduleDate
-  tuesday: CommerceScheduleDate
-  wednesday: CommerceScheduleDate
-  thursday: CommerceScheduleDate
-  friday: CommerceScheduleDate
-  saturday: CommerceScheduleDate
-  sunday: CommerceScheduleDate
-  holiday: CommerceScheduleDate
-}
-
 type Commerce {
   name: String
   phone: String
   address: String
   state: String
-  enable: Boolean
-  paymentMehods: [String]
+  is_enable: Boolean
   delivery_price: Int
   delivery_time: String
   commerce_status: CommerceStatus
   messages: CommerceMessage
-  schedules: CommerceSchedule
+  paymentMehods: [PaymentMethod]
+  schedules: [CommerceScheduleDate]
 }
 
 type Query {

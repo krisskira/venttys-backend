@@ -1,15 +1,21 @@
 
+input PaymentMethodInput {
+  name: String!
+  id: String!
+  description: String!
+}
+
 input CommerceScheduleDateInput {
   name: String!
   number_day: Int!
   code: Day!
   close: TimeInput!
   open: TimeInput!
-  enable: Boolean!
+  is_enable: Boolean!
 }
 
 input CommerceMessageFieldInput {
-  enable: Boolean!
+  is_enable: Boolean!
   value: String!
 }
 
@@ -17,17 +23,6 @@ input CommerceMessageInput {
   open: CommerceMessageFieldInput!
   await: CommerceMessageFieldInput!
   close: CommerceMessageFieldInput!
-}
-
-input CommerceScheduleInput {
-  monday: CommerceScheduleDateInput!
-  tuesday: CommerceScheduleDateInput!
-  wednesday: CommerceScheduleDateInput!
-  thursday: CommerceScheduleDateInput!
-  friday: CommerceScheduleDateInput!
-  saturday: CommerceScheduleDateInput!
-  sunday: CommerceScheduleDateInput!
-  holiday: CommerceScheduleDateInput!
 }
 
 input CommerceInput {

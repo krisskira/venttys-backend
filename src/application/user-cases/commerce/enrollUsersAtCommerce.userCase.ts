@@ -12,7 +12,7 @@ export const enrollUsersAtCommerceUserCase = async (
   user: CommerceUser
 ): Promise<string> => {
   if (
-    !user.comerce ||
+    !user.commerce ||
     !user.email ||
     !user.password ||
     !user.rol ||

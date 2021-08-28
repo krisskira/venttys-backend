@@ -11,9 +11,13 @@ export type Controller<TArgsInput, TDataOutput> = (
 
 /** BUSINESS LOGIC DATA TYPES */
 
-export type PaymentMethod = string;
+export interface PaymentMethod {
+  id: string;
+  description: string;
+  name: string;
+}
 export type OperationStatus = "Completed" | "NoCompleted";
-export type ROL = "managerial" | "operator";
+export type ROL = "Managerial" | "Operator";
 
 export type Day =
   | "monday"

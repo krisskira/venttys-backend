@@ -1,15 +1,21 @@
 
+input PaymentMethodInputPartial {
+  name: String
+  id: String
+  description: String
+}
+
 input CommerceScheduleDatePartialInput {
   name: String
   number_day: Int
   code: Day
   close: TimeInput
   open: TimeInput
-  enable: Boolean
+  is_enable: Boolean
 }
 
 input CommerceMessageFieldPartialInput {
-  enable: Boolean
+  is_enable: Boolean
   value: String
 }
 
@@ -19,28 +25,17 @@ input CommerceMessagePartialInput {
   close: CommerceMessageFieldPartialInput
 }
 
-input CommerceSchedulePartialInput {
-  monday: CommerceScheduleDatePartialInput
-  tuesday: CommerceScheduleDatePartialInput
-  wednesday: CommerceScheduleDatePartialInput
-  thursday: CommerceScheduleDatePartialInput
-  friday: CommerceScheduleDatePartialInput
-  saturday: CommerceScheduleDatePartialInput
-  sunday: CommerceScheduleDatePartialInput
-  holiday: CommerceScheduleDatePartialInput
-}
-
 input CommercePartialInput {
   commerceId: String!
   name: String
   phone: String
   address: String
   state: String
-  enable: Boolean
-  paymentMehods: [String]
+  is_enable: Boolean
   delivery_price: Int
   delivery_time: String
   commerce_status: CommerceStatus
   messages: CommerceMessagePartialInput
-  schedules: CommerceSchedulePartialInput
+  paymentMehods: [PaymentMethodInput]
+  schedules: [CommerceScheduleDateInput]
 }

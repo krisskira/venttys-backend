@@ -10,8 +10,8 @@ enum Day {
 }
 
 enum ROL {
-    managerial
-    operator
+    Managerial
+    Operator
 }
 
 enum OperationStatus {

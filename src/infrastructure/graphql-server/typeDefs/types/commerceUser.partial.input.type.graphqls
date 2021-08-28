@@ -1,7 +1,7 @@
 input CommerceUserPartialInput {
     auth_id: String!
     address: String
-    comerce: String
+    commerce: String
     name: String
     rol: ROL
 }
